@@ -49,7 +49,7 @@ class ProcessExecutorTest {
         public static void main(String[] args) {
             System.out.print(args.length);
             for (String arg : args) {
-                System.out.print("\\n[" + arg + "]");
+                System.out.print("\n[" + arg + "]");
             }
         }
     }
@@ -62,11 +62,11 @@ class ProcessExecutorTest {
                 .getCodeSource().getLocation().toURI()).toString();
         ProcessExecutor executor = new ProcessExecutor();
         executor.setCommandLine(List.of(java, "-cp", testClasses, ArgvEcho.class.getName(),
-                "", " ", "hello world", "\\"quoted\\"", "a;b"));
+                "", " ", "hello world", "\"quoted\"", "a;b"));
 
         assertThat(executor.call()).isZero();
         assertThat(executor.getProcessOutput())
-                .isEqualTo("5\\n[]\\n[ ]\\n[hello world]\\n[\\\"quoted\\\"]\\n[a;b]");
+                "", " ", "hello world", "\"quoted\"", "a;b"));
         assertThat(executor.getProcessError()).isEmpty();
     }
 
