@@ -327,6 +327,13 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
 
+        <!-- Isolated in-memory database for SchemaCrawler behavior tests -->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <!-- For JUnit Jupiter -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
