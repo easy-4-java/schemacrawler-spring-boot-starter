@@ -161,17 +161,17 @@ public class ProcessExecutor implements Callable<Integer> {
      */
 	public void setCommandLine(final List<String> args) {
 		requireNonNull(args, "No command provided");
-		if (args.isEmpty()) {
-			throw new IllegalArgumentException("No command provided");
+		if (args.isEmpty() || !StringUtils.hasText(args.get(0))) {
+			throw new IllegalArgumentException("No executable provided");
 		}
-
-		command = new ArrayList<String>();
 		for (final String arg : args) {
-            if (StringUtils.hasText(arg)) {
-                // ProcessBuilder takes raw argument values; shell quoting changes them.
-                command.add(arg);
-            }
-        }
+			if (arg == null) {
+				throw new IllegalArgumentException("Command arguments must not be null");
+			}
+		}
+		// ProcessBuilder takes raw argument values. Empty and whitespace arguments
+		// are significant and must retain their positions.
+		command = new ArrayList<String>(args);
 	}
 
 }
