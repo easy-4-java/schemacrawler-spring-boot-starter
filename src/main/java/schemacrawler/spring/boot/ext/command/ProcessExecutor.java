@@ -29,11 +29,9 @@ package schemacrawler.spring.boot.ext.command;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -73,8 +71,7 @@ public class ProcessExecutor implements Callable<Integer> {
      * @return the call
      */
 		public String call() throws Exception {
-			final Reader reader = new BufferedReader(new InputStreamReader(in));
-			return reader.toString();
+			return new String(in.readAllBytes(), StandardCharsets.UTF_8);
 		}
 
 	}
@@ -170,14 +167,11 @@ public class ProcessExecutor implements Callable<Integer> {
 
 		command = new ArrayList<String>();
 		for (final String arg : args) {
-			if (StringUtils.hasText(arg)) {
-				continue;
-			} else if (StringUtils.containsWhitespace(arg)) {
-				command.add(String.format("\"%s\"", arg));
-			} else {
-				command.add(arg);
-			}
-		}
+            if (StringUtils.hasText(arg)) {
+                // ProcessBuilder takes raw argument values; shell quoting changes them.
+                command.add(arg);
+            }
+        }
 	}
 
 }

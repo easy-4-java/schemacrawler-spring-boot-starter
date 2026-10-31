@@ -63,5 +63,8 @@ class SchemaCrawlerInclusionRulesTest {
 
         rules.setGrepDefinitionInclusionRule(rule);
         assertThat(rules.getGrepDefinitionInclusionRule()).isEqualTo(rule);
+
+        rules.setRoutineTypes(java.util.List.of(schemacrawler.schema.RoutineType.procedure));
+        assertThat(rules.getRoutineTypes()).containsExactly(schemacrawler.schema.RoutineType.procedure);
     }
 }
