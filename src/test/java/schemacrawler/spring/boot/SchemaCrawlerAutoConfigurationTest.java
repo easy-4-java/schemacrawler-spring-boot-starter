@@ -27,7 +27,9 @@ class SchemaCrawlerAutoConfigurationTest {
         JDBCDataSource dataSource = new JDBCDataSource();
         dataSource.setUrl("jdbc:hsqldb:mem:schemacrawler_config");
         dataSource.setUser("sa");
-        assertThat(configuration.connectionProvider(dataSource).getConnection()).isNotNull();
+        try (java.sql.Connection connection = configuration.connectionProvider(dataSource).getConnection()) {
+            assertThat(connection.isClosed()).isFalse();
+        }
         assertThat(configuration.databaseConnectorRegistry()).isNotNull();
     }
 
