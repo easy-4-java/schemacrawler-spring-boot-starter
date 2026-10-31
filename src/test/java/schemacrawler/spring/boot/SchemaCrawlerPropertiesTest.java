@@ -31,5 +31,10 @@ class SchemaCrawlerPropertiesTest {
 
         props.setEnabled(false);
         assertThat(props.isEnabled()).isFalse();
+
+        schemacrawler.spring.boot.ext.DatabaseSchemaCrawlerOptions options =
+                new schemacrawler.spring.boot.ext.DatabaseSchemaCrawlerOptions();
+        props.setCrawlerOptions(java.util.List.of(options));
+        assertThat(props.getCrawlerOptions()).containsExactly(options);
     }
 }
