@@ -23,7 +23,7 @@ class ProcessExecutorTest {
         assertThat(executor.call()).isZero();
         assertThat(executor.getExitCode()).isZero();
         assertThat(executor.getProcessOutput()).isEqualTo("hello world");
-        assertThat(executor.getProcessError()).isEmpty();
+                .isEqualTo("5\n[]\n[ ]\n[hello world]\n[\"quoted\"]\n[a;b]");
     }
     @Test
     void capturesStandardErrorAndExitStatus() throws Exception {
