@@ -23,7 +23,7 @@ class ProcessExecutorTest {
         assertThat(executor.call()).isZero();
         assertThat(executor.getExitCode()).isZero();
         assertThat(executor.getProcessOutput()).isEqualTo("hello world");
-                .isEqualTo("5\n[]\n[ ]\n[hello world]\n[\"quoted\"]\n[a;b]");
+        assertThat(executor.getProcessError()).isEmpty();
     }
     @Test
     void capturesStandardErrorAndExitStatus() throws Exception {
@@ -66,7 +66,7 @@ class ProcessExecutorTest {
 
         assertThat(executor.call()).isZero();
         assertThat(executor.getProcessOutput())
-                "", " ", "hello world", "\"quoted\"", "a;b"));
+                .isEqualTo("5\n[]\n[ ]\n[hello world]\n[\"quoted\"]\n[a;b]");
         assertThat(executor.getProcessError()).isEmpty();
     }
 
