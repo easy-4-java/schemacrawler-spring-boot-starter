@@ -139,8 +139,10 @@ private DatabaseConnectorRegistry databaseConnectorRegistry;
 
 ```bash
 mvn clean verify
-mvn -pl schemacrawler-spring-boot-starter -am test
 ```
+
+默认构建会运行两个本地自动装配测试（`*Tests.java`）。旧的 `*Test.java` 集成测试会编译，
+但依赖源码中配置的外部 SQL Server；只有该环境可用时才使用 `-Dtest=<测试类名>` 单独运行。
 
 ## 10. 排障
 

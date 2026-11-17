@@ -52,6 +52,7 @@ import schemacrawler.inclusionrule.RegularExpressionInclusionRule;
 import schemacrawler.schema.Catalog;
 import schemacrawler.schema.Column;
 import schemacrawler.schema.ColumnDataType;
+import schemacrawler.schema.DataTypeType;
 import schemacrawler.schema.EventManipulationType;
 import schemacrawler.schema.Routine;
 import schemacrawler.schema.Schema;
@@ -563,7 +564,7 @@ public class SchemaCrawlerTest extends BaseDatabaseTest {
 	private String printColumnDataType(final ColumnDataType columnDataType) {
 		final StringBuffer buffer = new StringBuffer();
 
-		final boolean isUserDefined = columnDataType.isUserDefined();
+		final boolean isUserDefined = columnDataType.getType() == DataTypeType.user_defined;
 		final String typeName = columnDataType.getFullName();
 		final String dataType = (isUserDefined ? "user defined " : "") + "column data-type";
 		final String nullable = (columnDataType.isNullable() ? "" : "not ") + "nullable";

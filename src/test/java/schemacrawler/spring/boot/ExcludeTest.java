@@ -36,7 +36,7 @@ import java.util.logging.Level;
 import org.junit.Rule;
 import org.junit.Test;
 
-import schemacrawler.SchemaCrawlerLogger;
+import java.util.logging.Logger;
 import schemacrawler.inclusionrule.RegularExpressionExclusionRule;
 import schemacrawler.schema.Catalog;
 import schemacrawler.schema.Column;
@@ -51,7 +51,7 @@ import schemacrawler.utility.NamedObjectSort;
 
 public class ExcludeTest extends BaseDatabaseTest {
 
-	private static final SchemaCrawlerLogger LOGGER = SchemaCrawlerLogger.getLogger(ExcludeTest.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(ExcludeTest.class.getName());
 // https://blog.csdn.net/qq_34337272/article/details/78815547
 	@Rule
 	public TestName testName = new TestName();

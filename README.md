@@ -139,8 +139,11 @@ private DatabaseConnectorRegistry databaseConnectorRegistry;
 
 ```bash
 mvn clean verify
-mvn -pl schemacrawler-spring-boot-starter -am test
 ```
+
+The default build runs the two local auto-configuration tests (`*Tests.java`).
+The older `*Test.java` integration tests compile but require the external SQL Server
+configured in their source; run them only in that environment with `-Dtest=<test class>`.
 
 ## 10. Troubleshooting
 
