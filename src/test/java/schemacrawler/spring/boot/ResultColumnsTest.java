@@ -39,7 +39,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import schemacrawler.SchemaCrawlerLogger;
+import java.util.logging.Logger;
 import schemacrawler.schema.ResultsColumn;
 import schemacrawler.schema.ResultsColumns;
 import schemacrawler.spring.boot.utility.TestName;
@@ -48,7 +48,7 @@ import schemacrawler.tools.utility.SchemaCrawlerUtility;
 
 public class ResultColumnsTest extends BaseDatabaseTest {
 
-	private static final SchemaCrawlerLogger LOGGER = SchemaCrawlerLogger.getLogger(ResultColumnsTest.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(ResultColumnsTest.class.getName());
 
 	@Rule
 	public TestName testName = new TestName();
