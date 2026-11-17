@@ -2,8 +2,8 @@ package schemacrawler.spring.boot;
 
 import java.sql.Connection;
 import java.util.Arrays;
+import java.util.Collections;
 
-import oracle.jdbc.OracleConnection;
 import schemacrawler.inclusionrule.ExcludeAll;
 import schemacrawler.inclusionrule.IncludeAll;
 import schemacrawler.inclusionrule.RegularExpressionInclusionRule;
@@ -28,7 +28,7 @@ public final class ConnectionOptionsExample {
 		// Create a database connection
 		final String connectionUrl = "jdbc:oracle:thin:@127.0.0.1:1521:orcl";
 	    final DatabaseConnectionSource dataSource = new DatabaseConnectionSource(
-	      connectionUrl);
+	      connectionUrl, Collections.singletonMap("remarksReporting", "true"));
 	    dataSource.setUserCredentials(new SingleUseUserCredentials("username", "password"));
 		
 		final Connection connection =  dataSource.get();
@@ -49,12 +49,6 @@ public final class ConnectionOptionsExample {
 				.custom(schemaInfoLevel)
 				.withLimitOptions(limitOptionsBuilder.toOptions());
 
-		// https://blog.csdn.net/hao7030187/article/details/56480735
-		//设置可以读取REMARKS
-		if (connection instanceof OracleConnection) {//设置Oracle数据库的表注释可读
-		    ((OracleConnection) connection).setRemarksReporting(true);//设置连接属性,使得可获取到表的REMARK(备注)
-		}
-		
 		// Get the schema definition
 		final Catalog catalog = SchemaCrawlerUtility.getCatalog(connection, options);
 

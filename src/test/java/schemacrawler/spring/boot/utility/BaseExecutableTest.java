@@ -38,7 +38,7 @@ public abstract class BaseExecutableTest {
 
 	protected void executeExecutable(final SchemaCrawlerExecutable executable, final String outputFormatValue,
 		final String referenceFileName) throws Exception {
-		final OutputOptions outputOptions = OutputOptionsBuilder.newOutputOptions(outputFormatValue, Paths.get(""));
+		final OutputOptions outputOptions = OutputOptionsBuilder.builder().withOutputFormatValue(outputFormatValue).withOutputFile(Paths.get("")).toOptions();
 		// executable.setConnection(connection);
 		executable.setOutputOptions(outputOptions);
 		executable.execute();
